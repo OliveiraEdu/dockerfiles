@@ -30,9 +30,9 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     npm i node-fetch
     npm i ws @types/ws
     npm i undici
-    npm install typescript@latest -g
-    tsc --init
-
+    npm install typescript --save-dev
+    npx tsc --init
+    
 # Expose SSH port
 EXPOSE 22
 
