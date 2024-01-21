@@ -16,21 +16,13 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     cd /home/Git && \
     git clone https://github.com/OliveiraEdu/iroha2_javascript/ && \
     cd /home/Git/iroha2_javascript && \
-    npm init --yes && \
-    npm install --save-dev typescript && \
+    npm init && \
+    npm i --save-dev typescript && \
     npx tsc --init && \
-    npm install --save-dev tsx && \
-    npm i hada && \
-    npm i node-fetch && \
-    npm i ws @types/ws && \
-    npm i undici && \
+    npm i --save-dev tsx && \
+    npm i  --save-dev hada && \
     echo "@iroha2:registry=https://nexus.iroha.tech/repository/npm-group/" > .npmrc && \
-    npm i @iroha2/client@5.0.0 && \
-    npm i @iroha2/data-model@5.0.0 && \
-    npm i @iroha2/crypto-core@1.0.1 && \
-    npm i @iroha2/crypto-target-node && \
-    npm i @iroha2/crypto-target-web && \
-    npm i @iroha2/crypto-target-bundler
+
     
 # Expose SSH port
 EXPOSE 22
