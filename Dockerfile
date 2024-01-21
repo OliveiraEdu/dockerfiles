@@ -21,7 +21,7 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     npm i --save-dev typescript && \
     npx tsc --init && \
     npm i --save-dev tsx && \
-    npm i  --save-dev hada && \
+    npm i  --save-dev hada
      
 # Expose SSH port
 EXPOSE 22
