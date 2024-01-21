@@ -18,7 +18,7 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     cd /home/Git/iroha2_javascript && \
     echo "@iroha2:registry=https://nexus.iroha.tech/repository/npm-group/" > .npmrc && \
     npm init --yes && \
-    git pull
+    git pull && \
     npm install --save-dev typescript && \
     npx tsc --init && \
     npm install --save-dev tsx && \
