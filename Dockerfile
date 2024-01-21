@@ -10,23 +10,21 @@ RUN mkdir /var/run/sshd && \
     sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 # Install Node.js and other dependencies
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get -y install nodejs && \
+RUN curl -sL https://deb.nodesource.com/setup_20.x -o nodesource_setup.sh && \
+    bash nodesource_setup.sh && \
+    apt-get install -y nodejs && \
     npm install -g pnpm && \
     mkdir /home/Git && \
     cd /home/Git && \
     git clone https://github.com/OliveiraEdu/iroha2_javascript/ && \
     cd /home/Git/iroha2_javascript && \
     npm init --yes && \
-    npm install  --save-dev typescript && \
+    npm install --save-dev typescript && \
     npx tsc --init && \
     npm install --save-dev tsx && \
-    npm i hada && \
-    npm i node-fetch && \
-    npm i ws @types/ws && \
-    npm i undici && \
+    npm install hada node-fetch ws @types/ws undici && \
     echo "@iroha2:registry=https://nexus.iroha.tech/repository/npm-group/" > .npmrc
-    
+
 # Expose SSH port
 EXPOSE 22
 
