@@ -12,13 +12,12 @@ RUN mkdir /var/run/sshd && \
 # Install Node.js and other dependencies
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get -y install nodejs && \
-    npm install -g pnpm && \
     mkdir /home/Git && \
     cd /home/Git && \
     git clone https://github.com/OliveiraEdu/iroha2_javascript/ && \
     cd /home/Git/iroha2_javascript && \
     npm init --yes && \
-    npm install  --save-dev typescript && \
+    npm install --save-dev typescript && \
     npx tsc --init && \
     npm install --save-dev tsx && \
     npm i hada && \
