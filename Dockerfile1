@@ -1,0 +1,17 @@
+FROM ubuntu:latest
+
+# Install essential packages
+RUN apt-get update && \
+    apt-get install -y openssh-server curl git
+
+# Set up SSH server
+RUN mkdir /var/run/sshd && \
+    echo 'root:password' | chpasswd && \
+    sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+  
+# Expose SSH port
+EXPOSE 22
+
+# Start SSH server
+CMD ["/usr/sbin/sshd", "-D"]
