@@ -1,5 +1,4 @@
-# Use a base image with Node.js and git
-FROM node:14
+FROM ubuntu:latest
 
 # Install essential packages
 RUN apt-get update && \
