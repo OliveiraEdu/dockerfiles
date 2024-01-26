@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 # Install essential packages
 RUN apt-get update && \
-    apt-get install -y openssh-server curl
+    apt-get install -y openssh-server curl git
 
 # Set up SSH server
 RUN mkdir /var/run/sshd && \
