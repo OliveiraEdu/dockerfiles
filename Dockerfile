@@ -10,6 +10,9 @@ RUN mkdir /var/run/sshd && \
     sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 
+# Change to the '/home' directory
+WORKDIR home
+
 # Create a directory named 'lab'
 RUN mkdir lab
 
