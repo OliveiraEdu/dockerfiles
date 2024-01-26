@@ -1,39 +1,68 @@
-FROM ubuntu:latest
+# Use a base image with Node.js and git
+FROM node:14
 
 # Install essential packages
 RUN apt-get update && \
-    apt-get install -y openssh-server curl git
+    apt-get install -y openssh-server curl
 
 # Set up SSH server
 RUN mkdir /var/run/sshd && \
     echo 'root:password' | chpasswd && \
     sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-# Install Node.js and other dependencies
+
+# Create a directory named 'lab'
+RUN mkdir lab
+
+# Change to the 'lab' directory
+WORKDIR lab
+
+# Initialize a git repository
+RUN git init
+
+# Set up npm registry in .npmrc
+RUN echo "@iroha2:registry=https://nexus.iroha.tech/repository/npm-group/" > .npmrc
+
+# Install Node.js 20.x, Node.js, and pnpm
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get -y install nodejs && \
-    npm install -g pnpm && \
-    mkdir /home/Git && \
-    cd /home/Git && \
-    git clone https://github.com/OliveiraEdu/iroha2_javascript/ && \
-    cd /home/Git/iroha2_javascript && \
-    npm init --yes && \
-    npm install typescript --save-dev && \
-    npx tsc --init && \
-    echo "@iroha2:registry=https://nexus.iroha.tech/repository/npm-group/" > .npmrc && \
-    npm i @iroha2/client@5.0.0 && \
-    npm i @iroha2/data-model@5.0.0 && \
-    npm i @iroha2/crypto-core@1.0.1 && \
-    npm i @iroha2/crypto-target-node && \
-    npm i @iroha2/crypto-target-web && \
-    npm i @iroha2/crypto-target-bundler && \
-    npm i hada && \
-    npm i tsx -g && \
-    npm i node-fetch && \
-    npm i ws @types/ws && \
-    npm i undici
+    npm install -g pnpm
 
-    
+# Initialize a pnpm project
+RUN pnpm init
+
+# Add all files to the git repository
+RUN git add .
+
+# Install TypeScript globally
+RUN pnpm i typescript
+
+# Initialize a TypeScript configuration
+RUN npx tsc --init
+
+# Install 'hada' package
+RUN pnpm i hada
+
+# Install 'tsx' globally
+RUN pnpm i tsx
+
+# Install 'tsx' locally
+RUN pnpm i tsx
+
+# Install 'node-fetch' using pnpm
+RUN pnpm i node-fetch
+
+# Install 'undici' using pnpm
+RUN pnpm i undici
+
+# Install specific versions of '@iroha2' packages
+RUN pnpm i @iroha2/client@5.0.0 && \
+    pnpm i @iroha2/data-model@5.0.0 && \
+    pnpm i @iroha2/crypto-core && \
+    pnpm i @iroha2/crypto-target-node && \
+    pnpm i @iroha2/crypto-target-web && \
+    pnpm i @iroha2/crypto-target-bundler
+
 # Expose SSH port
 EXPOSE 22
 
