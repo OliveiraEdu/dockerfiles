@@ -11,13 +11,13 @@ RUN mkdir /var/run/sshd && \
 
 
 # Change to the '/home' directory
-WORKDIR home
+WORKDIR /home
 
 # Create a directory named 'lab'
-RUN mkdir lab
+RUN mkdir /home/lab
 
 # Change to the 'lab' directory
-WORKDIR lab
+WORKDIR /home/lab
 
 # Initialize a git repository
 RUN git init
