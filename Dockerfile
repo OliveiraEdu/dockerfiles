@@ -7,3 +7,6 @@ RUN apt-get update && \
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get -y install nodejs && \
     npm install -g pnpm
+
+# Expose SSH port
+EXPOSE 8000
