@@ -7,4 +7,4 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get -y install nodejs && \
     npm install -g pnpm
 
-RUN pnpm create vite@latest
+#RUN pnpm create vite@latest
