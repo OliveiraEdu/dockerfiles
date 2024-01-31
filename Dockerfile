@@ -9,4 +9,4 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     npm install -g pnpm
 
 # Expose SSH port
-EXPOSE 8000
+#EXPOSE 8000
